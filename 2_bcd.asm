@@ -1,0 +1,34 @@
+code segment
+assume cs:code
+start:mov dx,0dc03h
+mov al,82h
+out dx,al
+mov dx,0dc00h
+mov al,0
+mov cx,10
+l:out dx,al
+call delay
+inc al
+loop l
+mov al,8
+mov cx,9
+l1:out dx,al
+call delay
+dec al
+loop l1
+mov ah,4ch
+int 21h
+delay proc 
+push cx
+push bx
+mov cx,0ffffh
+l1:mov bx,5fffh
+l2:dec bx
+jnz l2
+loop l1
+pop bx
+pop cx
+ret
+delay proc endp
+code ends
+end start
